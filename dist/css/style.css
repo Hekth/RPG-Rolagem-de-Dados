@@ -344,5 +344,9 @@ footer {
     .historico-container__rolagem span strong {
         font-size: 1rem;
         font-weight: 600;
-    } 
+    }
+
+    .editarDadoDialog input {
+        width: 100%;
+    }
 }

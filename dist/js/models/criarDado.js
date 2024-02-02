@@ -40,6 +40,9 @@ export class CriarDado {
             alert("Já existe um dado com este número de lados!");
             return;
         }
+        else if (parseInt(numeroDeLados) < 2) {
+            alert("O dado deve ter no mínimo 2 lados!");
+        }
         else {
             this.dadosCriados.push({ numeroDeLados, img: "imagens/dadoGenerico.png" });
             this.criarElemento();
