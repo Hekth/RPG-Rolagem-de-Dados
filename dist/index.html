@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="./imagens/d20.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+    <link rel="stylesheet" href="./css/style.css">
+    <script type="module" src="js/app.js" defer></script>
+    <title>RPG - Rolagem de Dados</title>
+</head>
+<body>
+    <header class="cabecalho">
+        <div>
+            <img src="imagens/logo-dado.png" alt="um dado de 20 lados" id="logo">
+        </div>
+        <div>
+            <span id="menu-historico">
+                Histórico
+            </span>
+            <span id="configuracoes">
+                Configurações
+            </span>
+        </div>
+    </header>
+    <main>
+        <h2 class="dados-titulo">
+            Dados
+        </h2>
+        <section class="dados-container" id="dados-container">
+            
+        </section>
+        <section class="modificaDados">
+            <div class="modificaDados__container">
+                <div class="modificaDados__botoes">
+                    <button type="button" class="decrementaUmDado">-</button>
+                    <span class="qtdDados">1d</span>
+                    <button type="button" class="incrementaUmDado">+</button>
+                </div>
+                <small>Quantidade de dados</small>
+            </div>
+            <div class="modificaDados__container">
+                <div class="modificaDados__botoes">
+                    <button class="decrementaModificador" type="button">-</button>
+                    <span class="modificadorValor">0</span>
+                    <button class="incrementaModificador" type="button">+</button>
+                </div>
+                <small>Modificadores</small>
+            </div>
+        </section>
+    </main>
+    <footer>
+        <span class="feito-por">
+            Feitor por Heitor da Costa Cândido
+        </span>
+        <div class="rodape-links">
+            <a href="https://github.com/Hekth" target="_blank">Github</a>
+            <a href="https://www.linkedin.com/in/heitor-candido/" target="_blank">Linkedin</a>
+        </div>
+    </footer>
+    <dialog class="resultado-dados dialog-estilo-padrao w3-animate-zoom">
+        <span class="fechar-dialog">X</span>
+        <section class="resultado-dados-container">
+            <span class="qtdDadosAviso">1d</span>
+            <span class="resultadoTotal"></span>
+            <span class="resultadosIndividuais"></span>
+        </section>
+    </dialog>
+    <dialog id="historico" class="w3-animate-top historico-dialog dialog-estilo-padrao">
+        <span class="fechar-dialog">X</span>
+        <h1 class="dialog-titulo">
+            Histórico
+        </h1>
+        <section id="historico-container" class="historico-container">
+        </section>
+        <button type="button" id="apagar-historico-btn" class="dialog-btn">
+            Apagar histórico
+        </button>
+    </dialog>
+    <dialog id="configuracoesDialog" class="configuracoes-dialog w3-animate-top dialog-estilo-padrao" >
+        <span class="fechar-dialog">X</span>
+        <h1 class="configuracoes__titulo dialog-titulo">Configurações</h1>
+        <section class="configuracoes__container">
+            <div>
+                <label for="numeroLados">Criar dado <small>(Nº de lados)</small>:</label>
+                <input type="number" value="2" id="numeroLados" min="2">
+                <button id="criarNovoDadoBtn">
+                    Criar
+                </button>
+            </div>
+            <div>
+                <label for="darkMode">DarkMode:</label>
+                <input type="checkbox" id="darkMode">
+            </div>
+        </section>
+    </dialog>
+    <dialog id="editarDadoDialog" class="editarDadoDialog w3-animate-zoom dialog-estilo-padrao">
+        <span class="fechar-dialog">X</span>
+        <h1 class="dialog-titulo">
+            Editar dado
+        </h1>
+        <form id="formEditarDado">
+            <div>
+                <label for="alterarImagem">Alterar imagem do dado: </label>
+                <input type="text" name="arquivo" id="alterarImagem" placeholder="Insira a URL da imagem">
+            </div>
+            <div>
+                <label for="alterarNumeroDeLados">Alterar número de lados: </label>
+                <input type="number" id="alterarNumeroDeLados" min="2" value="2">
+            </div>
+            <button type="submit" class="dialog-btn">Salvar</button>
+        </form>
+    </dialog>
+</body>
+</html>
