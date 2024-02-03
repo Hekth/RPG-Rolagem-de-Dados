@@ -42,7 +42,8 @@ export class EditaDado {
     resetarCampos() {
         this.campoAlterarImagem.value = "";
     }
-    mudaNumeroDeLadosDoCampo(numeroDeLados) {
+    mantemNumeroDeLadosEImg(numeroDeLados, img) {
         this.campoAlterarNumeroLados.value = numeroDeLados;
+        this.campoAlterarImagem.value = img;
     }
 }

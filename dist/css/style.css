@@ -288,13 +288,14 @@ footer {
     align-items: flex-start;
 }
 
-.configuracoes__container div:nth-child(2) {
+.alinhaBotao {
     align-items: center;
 }
 
 .configuracoes__container div button {
     padding: 0.4rem;
     font-size: 0.8rem;
+    margin: 0;
 }
 
 .configuracoes__container div input[type="number"] {

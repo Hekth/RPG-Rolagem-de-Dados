@@ -84,13 +84,23 @@
             <div>
                 <label for="numeroLados">Criar dado <small>(Nº de lados)</small>:</label>
                 <input type="number" value="2" id="numeroLados" min="2">
-                <button id="criarNovoDadoBtn">
-                    Criar
-                </button>
+                <div>
+                    <button id="criarNovoDadoBtn">
+                        Criar
+                    </button>
+                </div>
             </div>
-            <div>
+            <div class="alinhaBotao">
                 <label for="darkMode">DarkMode:</label>
                 <input type="checkbox" id="darkMode">
+            </div>
+            <div class="alinhaBotao">
+                <span>Resetar dados para os dados padrão: </span>
+                <button type="button" id="resetarDadosBtn"> Resetar </button>
+            </div>
+            <div class="alinhaBotao">
+                <span>Excluir todos os dados: </span>
+                <button type="button" id="excluirTodosOsDados"> Excluir </button>
             </div>
         </section>
     </dialog>

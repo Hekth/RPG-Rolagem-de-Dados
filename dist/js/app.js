@@ -8,6 +8,9 @@ const dadoController = new DadoController();
 const alteraDado = new AlteraQtdDados(".qtdDados");
 const alteraModificadorDado = new AlteraModificadorDado(".modificadorValor");
 const criarDado = new CriarDado(dadoController, darkMode);
+const criarDezNovosDados = document.getElementById("criarDezNovosDados");
+const excluirTodosOsDados = document.getElementById("excluirTodosOsDados");
+const resetarDadosBtn = document.getElementById("resetarDadosBtn");
 const darkmodeInput = document.getElementById("darkMode");
 const criarNovoDadoBtn = document.getElementById("criarNovoDadoBtn");
 const campocriarDado = document.getElementById("numeroLados");
@@ -19,15 +22,28 @@ const dialogHistorico = document.getElementById("historico");
 const botoesModificadores = document.querySelectorAll('.modificaDados__botoes button');
 const fecharDialog = document.querySelectorAll(".fechar-dialog");
 const funcoesBotoes = {
-    decrementaUmDado: () => alteraDado.alteraValor(true),
-    incrementaUmDado: () => alteraDado.alteraValor(false),
-    decrementaModificador: () => alteraModificadorDado.alteraValor(true),
-    incrementaModificador: () => alteraModificadorDado.alteraValor(false)
+    decrementaUmDado: (quantidade) => alteraDado.alteraValor(true, quantidade),
+    incrementaUmDado: (quantidade) => alteraDado.alteraValor(false, quantidade),
+    decrementaModificador: (quantidade) => alteraModificadorDado.alteraValor(true, quantidade),
+    incrementaModificador: (quantidade) => alteraModificadorDado.alteraValor(false, quantidade)
 };
+let myInterval = null;
 botoesModificadores.forEach((botao) => {
-    botao.addEventListener("click", () => {
-        const classe = botao.className;
-        funcoesBotoes[classe]();
+    const milissegundos = 100;
+    const classe = botao.className;
+    botao.addEventListener("mousedown", (e) => {
+        funcoesBotoes[classe](1);
+        myInterval = setInterval(() => {
+            funcoesBotoes[classe](2);
+        }, milissegundos);
+    });
+    botao.addEventListener("mouseup", () => {
+        clearInterval(myInterval);
+        myInterval = null;
+    });
+    botao.addEventListener("mouseleave", () => {
+        clearInterval(myInterval);
+        myInterval = null;
     });
 });
 fecharDialog.forEach((element) => {
@@ -60,4 +76,10 @@ darkmodeInput.addEventListener("change", (e) => {
         darkMode.desativarDarkMode();
         criarDado.atualizar();
     }
+});
+resetarDadosBtn.addEventListener("click", () => {
+    criarDado.resetarDados();
+});
+excluirTodosOsDados.addEventListener("click", () => {
+    criarDado.excluirTodosOsDados();
 });

@@ -18,19 +18,7 @@ export class CriarDado {
             this.atualizar();
         }
         else {
-            const dadosPadrao = [
-                { numeroDeLados: "4", img: "imagens/d4.png" },
-                { numeroDeLados: "6", img: "imagens/d6.png" },
-                { numeroDeLados: "8", img: "imagens/d8.png" },
-                { numeroDeLados: "10", img: "imagens/d10.png" },
-                { numeroDeLados: "12", img: "imagens/d12.png" },
-                { numeroDeLados: "14", img: "imagens/d14.png" },
-                { numeroDeLados: "16", img: "imagens/d16.png" },
-                { numeroDeLados: "18", img: "imagens/d18.png" },
-                { numeroDeLados: "20", img: "imagens/d20.png" },
-                { numeroDeLados: "100", img: "imagens/d100.png" }
-            ];
-            this.dadosCriados = dadosPadrao;
+            this.dadosCriados = this.retornarDadosPadrao();
             this.criarElemento();
             this.atualizar();
         }
@@ -38,7 +26,6 @@ export class CriarDado {
     criarDado(numeroDeLados) {
         if (this.dadosCriados.some((dado) => dado.numeroDeLados === numeroDeLados)) {
             alert("Já existe um dado com este número de lados!");
-            return;
         }
         else if (parseInt(numeroDeLados) < 2) {
             alert("O dado deve ter no mínimo 2 lados!");
@@ -47,7 +34,7 @@ export class CriarDado {
             this.dadosCriados.push({ numeroDeLados, img: "imagens/dadoGenerico.png" });
             this.criarElemento();
             this.atualizar();
-            alert("Dado criado com sucesso!");
+            alert("Dado(s) criado(s) com sucesso!");
         }
     }
     criarElemento() {
@@ -65,7 +52,7 @@ export class CriarDado {
                     Rolar d${dado.numeroDeLados}
                 </span>
             `;
-            containerPai.append(this.criaEdicaoDado(dado.numeroDeLados));
+            containerPai.append(this.criaEdicaoDado(dado.numeroDeLados, dado.img));
             containerButton.addEventListener("click", (e) => {
                 const target = e.target;
                 if (target.localName === "button") {
@@ -80,11 +67,7 @@ export class CriarDado {
             return containerPai;
         });
     }
-    atualizar() {
-        this.criarElemento().forEach((dado) => this.dadosContainer.append(dado));
-        this.adicionaDadoNoLocalStorage();
-    }
-    criaEdicaoDado(id) {
+    criaEdicaoDado(id, img) {
         const divEditarExcluir = document.createElement("div");
         divEditarExcluir.classList.add("editarExcluir");
         const iconeExcluir = document.createElement("img");
@@ -99,7 +82,7 @@ export class CriarDado {
         });
         iconeEditar.addEventListener("click", () => {
             this.editaDado.abreEditarDado();
-            this.editaDado.mudaNumeroDeLadosDoCampo(id);
+            this.editaDado.mantemNumeroDeLadosEImg(id, img);
             this.formularioEditarDado.onsubmit = (e) => {
                 e.preventDefault();
                 const dadoEditado = this.editaDado.editarDado(id, this.dadosCriados);
@@ -117,8 +100,35 @@ export class CriarDado {
         divEditarExcluir.append(iconeEditar, iconeExcluir);
         return divEditarExcluir;
     }
+    atualizar() {
+        this.criarElemento().forEach((dado) => this.dadosContainer.append(dado));
+        this.adicionaDadoNoLocalStorage();
+    }
     adicionaDadoNoLocalStorage() {
         localStorage.setItem("dados", JSON.stringify(this.dadosCriados));
+    }
+    resetarDados() {
+        this.dadosCriados = this.retornarDadosPadrao();
+        this.atualizar();
+    }
+    retornarDadosPadrao() {
+        const dadosPadrao = [
+            { numeroDeLados: "4", img: "imagens/d4.png" },
+            { numeroDeLados: "6", img: "imagens/d6.png" },
+            { numeroDeLados: "8", img: "imagens/d8.png" },
+            { numeroDeLados: "10", img: "imagens/d10.png" },
+            { numeroDeLados: "12", img: "imagens/d12.png" },
+            { numeroDeLados: "14", img: "imagens/d14.png" },
+            { numeroDeLados: "16", img: "imagens/d16.png" },
+            { numeroDeLados: "18", img: "imagens/d18.png" },
+            { numeroDeLados: "20", img: "imagens/d20.png" },
+            { numeroDeLados: "100", img: "imagens/d100.png" }
+        ];
+        return dadosPadrao;
+    }
+    excluirTodosOsDados() {
+        this.dadosCriados = [];
+        this.atualizar();
     }
     get getDados() {
         const dadosCriados = this.dadosCriados;
